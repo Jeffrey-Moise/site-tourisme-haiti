@@ -1,0 +1,31 @@
+PROJET : PROMOTION DU PATRIMOINE TOURISTIQUE
+SUJET : SITE D'INFORMATION TOURISTIQUE — MINISTÈRE DU TOURISME D'HAÏTI
+OPTION CHOISIE : OPTION 3
+
+==================================================
+MEMBRES DU GROUPE
+==================================================
+
+1. DERYSMA Cedrick
+2. MOISE Jeffrey
+3. POTEAU Harven E.
+
+==================================================
+TECHNOLOGIES UTILISÉES
+==================================================
+
+HTML5
+CSS3
+
+==================================================
+DESCRIPTION DU PROJET
+==================================================
+
+Création d'un site web d'information touristique consacré
+à la promotion et à la valorisation du patrimoine culturel
+et naturel d'Haïti.
+
+Le site présente différentes destinations et lieux
+patrimoniaux, leur histoire, leur importance culturelle
+ou naturelle ainsi que des informations pratiques
+destinées aux visiteurs.

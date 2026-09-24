@@ -1,0 +1,1193 @@
+/* ============================================================
+   TERRES ET MÉMOIRES — style.css
+   Site de promotion du patrimoine touristique haïtien
+   Ministère du Tourisme
+   ============================================================ */
+
+/* ---------- 1. VARIABLES CSS ---------- */
+:root {
+  /* Couleurs — palette "terres et mémoires" (volontairement hors drapeau) */
+  --couleur-terre: #A8562E;       /* ocre brûlé — accents, liens actifs, catégories */
+  --couleur-terre-clair: #C98A5E; /* variante claire, survols, dégradés placeholders */
+  --vert-profond: #1F3A2E;        /* nav, titres forts */
+  --nuit: #14213D;                /* accents rares, footer secondaire */
+  --rouge-haiti: #CE1126;         /* barre supérieure institutionnelle */
+  --sable: #F4EDE4;               /* fond principal, chaleureux (pas blanc pur) */
+  --blanc: #FFFFFF;
+  --texte: #2A241E;               /* brun très foncé, pas noir pur */
+  --texte-att: #6B6156;           /* texte secondaire, méta, fil d'Ariane */
+  --bordure: #E3D9CB;
+
+  /* Typographies (avec repli système, aucune dépendance obligatoire) */
+  --police-titres: 'Lora', Georgia, 'Times New Roman', serif;
+  --police-texte: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+
+  /* Espacements (échelle cohérente) */
+  --espace-xs: 0.4rem;
+  --espace-sm: 0.75rem;
+  --espace-md: 1.25rem;
+  --espace-lg: 2rem;
+  --espace-xl: 3rem;
+
+  /* Largeurs / grille */
+  --largeur-max: 1100px;
+
+  /* Rayons et transitions (sobres, pas d'arrondis excessifs) */
+  --rayon: 4px;
+  --transition: 0.2s ease;
+}
+
+/* ---------- 2. RESET MINIMAL ---------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+:root {
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+html {
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+}
+
+body {
+  margin: 0;
+  background: var(--sable);
+  color: var(--texte);
+  font-family: var(--police-texte);
+  line-height: 1.6;
+  font-size: 1rem;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--police-titres);
+  line-height: 1.2;
+  margin-top: 0;
+}
+
+/* ---------- 3. EN-TÊTE : TOPBAR + NAVIGATION ---------- */
+header.site {
+  /* le fond est désormais porté par .topbar et nav.principale séparément */
+}
+
+.topbar {
+  background: var(--rouge-haiti);
+  color: #fff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--espace-sm);
+  padding: 0.7rem clamp(1rem, 4vw, var(--espace-xl));
+  padding-top: calc(0.7rem + env(safe-area-inset-top, 0px));
+}
+
+.logo-block {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  color: #fff;
+  min-width: 0;
+}
+
+.logo-hibiscus {
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  flex-shrink: 0;
+}
+
+.logo-texte {
+  font-family: var(--police-titres);
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.embleme-national {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+nav.principale {
+  background: var(--vert-profond);
+  padding: 0.55rem clamp(1rem, 4vw, var(--espace-xl));
+}
+
+nav.principale ul {
+  max-width: var(--largeur-max);
+  margin: 0 auto;
+  display: flex;
+  gap: clamp(0.75rem, 2vw, var(--espace-md));
+  padding: 0;
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+}
+
+nav.principale a {
+  text-decoration: none;
+  color: var(--sable);
+  opacity: 0.85;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  transition: opacity var(--transition), border-color var(--transition);
+}
+
+nav.principale a:hover,
+nav.principale a:focus-visible {
+  opacity: 1;
+  border-bottom-color: var(--couleur-terre);
+}
+
+nav.principale a[aria-current="page"] {
+  opacity: 1;
+  border-bottom-color: var(--couleur-terre);
+}
+
+nav.fil-ariane {
+  max-width: var(--largeur-max);
+  margin: 0 auto;
+  padding: var(--espace-sm) clamp(1rem, 4vw, var(--espace-xl));
+  font-size: 0.8rem;
+  color: var(--texte-att);
+}
+
+nav.fil-ariane a {
+  color: var(--couleur-terre);
+  text-decoration: none;
+}
+
+nav.fil-ariane a:hover,
+nav.fil-ariane a:focus-visible {
+  text-decoration: underline;
+}
+
+/* ---------- 4. SECTION HERO (page destination) ---------- */
+.hero {
+  max-width: var(--largeur-max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: clamp(1rem, 3vw, 2.5rem);
+  padding: var(--espace-md) clamp(1rem, 4vw, var(--espace-xl)) var(--espace-lg);
+  align-items: end;
+}
+
+.hero figure {
+  margin: 0;
+  grid-column: 1;
+}
+
+.hero .cadre-image {
+  aspect-ratio: 16 / 10;
+  border-radius: var(--rayon);
+  overflow: hidden;
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  padding: var(--espace-md);
+  background-size: cover;
+  background-position: center;
+}
+
+.hero .cadre-image::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(20,33,61,0) 40%, rgba(20,33,61,0.55) 100%);
+  z-index: 0;
+}
+
+.hero .cadre-image img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.hero figcaption {
+  position: relative;
+  z-index: 1;
+  color: var(--blanc);
+  font-size: 0.8rem;
+}
+
+.hero .intro {
+  grid-column: 2;
+}
+
+.categorie {
+  display: inline-block;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--couleur-terre);
+  border: 1px solid var(--couleur-terre);
+  border-radius: 3px;
+  padding: 0.2rem 0.6rem;
+  margin-bottom: var(--espace-sm);
+}
+
+h1 {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  margin: 0 0 var(--espace-xs);
+}
+
+.lieu-meta {
+  font-size: 0.85rem;
+  color: var(--texte-att);
+  margin-bottom: var(--espace-md);
+}
+
+.accroche {
+  font-family: var(--police-titres);
+  font-style: italic;
+  font-size: 1.05rem;
+  color: #4A4038;
+}
+
+main {
+  padding: 0 clamp(1rem, 4vw, var(--espace-xl)) var(--espace-xl);
+  max-width: var(--largeur-max);
+  margin: 0 auto;
+}
+
+.grille-article {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: clamp(1.5rem, 3vw, var(--espace-xl));
+  margin-top: var(--espace-md);
+}
+
+article h2 {
+  font-size: 1.3rem;
+  border-bottom: 2px solid var(--couleur-terre);
+  display: inline-block;
+  padding-bottom: 0.2rem;
+  margin-top: 2.2rem;
+}
+
+article p {
+  max-width: 62ch;
+}
+
+aside {
+  background: var(--blanc);
+  border: 1px solid var(--bordure);
+  border-radius: var(--rayon);
+  padding: var(--espace-md) 1.4rem;
+  align-self: start;
+}
+
+aside h3 {
+  font-size: 1rem;
+  margin-top: 0;
+}
+
+aside dl {
+  font-size: 0.85rem;
+  margin: 0;
+}
+
+aside dt {
+  color: var(--couleur-terre);
+  font-weight: 600;
+  margin-top: var(--espace-sm);
+}
+
+aside dd {
+  margin: 0.1rem 0 0;
+}
+
+.conseil {
+  margin-top: var(--espace-lg);
+  padding: var(--espace-sm) var(--espace-md);
+  background: var(--sable);
+  border-left: 3px solid var(--vert-profond);
+  font-size: 0.85rem;
+}
+
+/* ---------- 6. CARTES DE DESTINATIONS (page destinations.html) ---------- */
+.grille-destinations {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--espace-md);
+}
+
+.carte-destination {
+  background: var(--blanc);
+  border: 1px solid var(--bordure);
+  border-radius: var(--rayon);
+  overflow: hidden;
+  text-decoration: none;
+  color: var(--texte);
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.carte-destination:hover,
+.carte-destination:focus-visible {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 16px rgba(20, 33, 61, 0.12);
+}
+
+.carte-destination .cadre-image {
+  aspect-ratio: 4 / 3;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.carte-destination .cadre-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.carte-destination .contenu-carte {
+  padding: var(--espace-sm) var(--espace-md);
+}
+
+.carte-destination h3 {
+  font-size: 1.05rem;
+  margin: 0 0 var(--espace-xs);
+}
+
+/* Variation de taille pour composition asymétrique (évite la grille uniforme) */
+.carte-destination.mise-en-avant {
+  grid-column: span 2;
+}
+
+.carte-destination.mise-en-avant .cadre-image {
+  aspect-ratio: 16 / 9;
+}
+
+/* ---------- 6b. BLOCS ÉDITORIAUX ALTERNÉS (page patrimoine.html) ---------- */
+.bloc-strate {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: clamp(1.5rem, 3vw, var(--espace-xl));
+  align-items: center;
+  margin-bottom: var(--espace-xl);
+}
+
+.bloc-strate--inverse {
+  grid-template-columns: 1.4fr 1fr;
+}
+
+/* ---------- 6c. FRISE HISTORIQUE (page histoire-culture.html) ---------- */
+.frise-historique {
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0 0 0 1.5rem;
+  border-left: 2px solid var(--couleur-terre);
+  max-width: 68ch;
+}
+
+.frise-historique li {
+  position: relative;
+  padding-bottom: var(--espace-lg);
+}
+
+.frise-historique li::before {
+  content: "";
+  position: absolute;
+  left: -1.75rem;
+  top: 0.3rem;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--couleur-terre);
+}
+
+.frise-historique li:last-child {
+  padding-bottom: 0;
+}
+
+.frise-date {
+  display: block;
+  font-family: var(--police-titres);
+  font-weight: 600;
+  color: var(--vert-profond);
+  margin-bottom: 0.2rem;
+}
+
+.frise-historique p {
+  margin: 0;
+  font-size: 0.92rem;
+}
+
+/* ---------- 7. BOUTONS ET LIENS D'ACTION ---------- */
+.bouton {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  border: 1px solid var(--vert-profond);
+  border-radius: var(--rayon);
+  color: var(--vert-profond);
+  text-decoration: none;
+  font-size: 0.9rem;
+  position: relative;
+  transition: color var(--transition), background var(--transition);
+}
+
+.bouton:hover,
+.bouton:focus-visible {
+  background: var(--vert-profond);
+  color: var(--sable);
+}
+
+.lien-souligne {
+  text-decoration: none;
+  color: var(--couleur-terre);
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--transition);
+}
+
+.lien-souligne:hover,
+.lien-souligne:focus-visible {
+  border-bottom-color: var(--couleur-terre);
+}
+
+/* ---------- 8. PIED DE PAGE ---------- */
+footer.site {
+  background: var(--nuit);
+  color: #D9DDE6;
+  padding: var(--espace-lg) clamp(1rem, 4vw, var(--espace-xl));
+  padding-bottom: calc(var(--espace-lg) + env(safe-area-inset-bottom, 0px));
+  font-size: 0.85rem;
+  margin-top: var(--espace-lg);
+}
+
+footer.site .contenu-footer {
+  max-width: var(--largeur-max);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: var(--espace-md);
+}
+
+footer.site h4 {
+  color: var(--sable);
+  font-size: 0.9rem;
+  margin-bottom: var(--espace-xs);
+}
+
+footer.site a {
+  color: #D9DDE6;
+  text-decoration: none;
+}
+
+footer.site a:hover,
+footer.site a:focus-visible {
+  text-decoration: underline;
+}
+
+footer.site address {
+  font-style: normal;
+  font-size: 0.85rem;
+  line-height: 1.7;
+}
+
+.reseaux-sociaux {
+  display: flex;
+  gap: 0.7rem;
+  margin-top: 0.3rem;
+}
+
+.icone-reseau {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.08);
+  color: #d9ddE6;
+  transition: background var(--transition);
+}
+
+.icone-reseau:hover,
+.icone-reseau:focus-visible {
+  background: var(--couleur-terre);
+}
+
+.icone-reseau img {
+  width: 18px;
+  height: 18px;
+  object-fit: contain;
+}
+
+.copyright {
+  max-width: var(--largeur-max);
+  margin: var(--espace-md) auto 0;
+  padding-top: var(--espace-sm);
+  border-top: 1px solid rgba(217, 221, 230, 0.2);
+  font-size: 0.75rem;
+  color: #a9afc0;
+  text-align: center;
+}
+
+
+/* ---------- Pages "Bientôt disponible" ---------- */
+.page-bientot {
+  min-height: 46vh;
+  width: min(760px, 100%);
+  margin: clamp(4rem, 10vw, 7rem) auto;
+  padding: clamp(2rem, 5vw, 4rem);
+  text-align: center;
+  background: var(--blanc);
+  border: 1px solid var(--bordure);
+  border-top: 4px solid var(--page-accent, var(--couleur-terre));
+}
+
+.page-bientot .categorie {
+  display: inline-block;
+  margin-bottom: 0.8rem;
+}
+
+.page-bientot h1 {
+  margin-bottom: 0.6rem;
+}
+
+.bientot-kicker {
+  font-family: var(--police-titres);
+  font-size: clamp(1.35rem, 3vw, 1.75rem);
+  color: var(--couleur-terre);
+  margin: 0 0 1rem;
+}
+
+.page-bientot .accroche {
+  max-width: 56ch;
+  margin-inline: auto;
+}
+
+.page-bientot .bouton {
+  display: inline-flex;
+  margin-top: 0.8rem;
+}
+
+/* ---------- 9. ACCESSIBILITÉ : MOUVEMENT RÉDUIT ---------- */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    animation: none !important;
+  }
+}
+/* ============================================================
+   MODIFICATION 2026 — IDENTITÉ INSTITUTIONNELLE + CARROUSEL CSS
+   ============================================================ */
+
+/* ---------- Identité de page ---------- */
+body.page-accueil { --page-accent: #D5A33B; }
+body.page-destinations { --page-accent: #A96A3A; }
+body.page-patrimoine { --page-accent: #7A4D35; }
+body.page-histoire { --page-accent: #8C703E; }
+body.page-infos { --page-accent: #47715D; }
+body.page-contact { --page-accent: #6B5A45; }
+body.page-destination-nature { --page-accent: #37745B; }
+body.page-destination-histoire { --page-accent: #8C703E; }
+body.page-destination-littoral { --page-accent: #3D7186; }
+body.page-destination-culture { --page-accent: #8B5947; }
+
+/* ---------- Nouveau header ---------- */
+.topbar {
+  background: var(--rouge-haiti);
+  padding: 0;
+  position: relative;
+  isolation: isolate;
+}
+
+.topbar::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  background: var(--page-accent, #D5A33B);
+  opacity: 0.95;
+}
+
+.topbar-inner {
+  width: min(100%, var(--largeur-max));
+  margin: 0 auto;
+  min-height: 78px;
+  padding: 0.45rem clamp(1rem, 4vw, var(--espace-xl));
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.logo-block {
+  flex: 0 1 auto;
+  gap: 0.8rem;
+  min-width: 0;
+}
+
+.logo-hibiscus {
+  width: 88px;
+  height: 58px;
+  border: 0;
+  border-radius: 0;
+  object-fit: contain;
+  flex: 0 0 auto;
+}
+
+.logo-texte {
+  font-family: var(--police-texte);
+  font-size: 0.98rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: #fff;
+  white-space: nowrap;
+}
+
+.embleme-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-left: auto;
+}
+
+.embleme-label {
+  font-family: var(--police-titres);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.9);
+  white-space: nowrap;
+}
+
+.embleme-national {
+  width: 52px;
+  height: 58px;
+  object-fit: contain;
+}
+
+nav.principale {
+  background: #fff;
+  padding: 0;
+  border-bottom: 1px solid var(--bordure);
+  box-shadow: 0 2px 8px rgba(42,36,30,0.04);
+}
+
+nav.principale ul {
+  width: min(100%, var(--largeur-max));
+  min-height: 50px;
+  padding: 0 clamp(1rem, 4vw, var(--espace-xl));
+  display: flex;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: clamp(0.75rem, 2.2vw, 2rem);
+}
+
+nav.principale li {
+  display: flex;
+  align-items: stretch;
+}
+
+nav.principale a {
+  color: var(--texte);
+  opacity: 1;
+  display: flex;
+  align-items: center;
+  padding: 0.85rem 0.05rem 0.65rem;
+  border-bottom: 3px solid transparent;
+  transition: color var(--transition), border-color var(--transition);
+}
+
+nav.principale a:hover,
+nav.principale a:focus-visible {
+  color: var(--rouge-haiti);
+  border-bottom-color: var(--page-accent, #D5A33B);
+}
+
+nav.principale a[aria-current="page"] {
+  color: var(--rouge-haiti);
+  border-bottom-color: var(--page-accent, #D5A33B);
+}
+
+/* ---------- Carrousel d'accueil — CSS uniquement ---------- */
+.hero-slider {
+  width: 100vw;
+  max-width: 100vw;
+  height: clamp(560px, 78svh, 820px);
+  min-height: 560px;
+  position: relative;
+  overflow: hidden;
+  background: #171310;
+  isolation: isolate;
+  margin-left: 50%;
+  transform: translateX(-50%);
+}
+
+.slides,
+.hero-slider .slide {
+  position: absolute;
+  inset: 0;
+}
+
+.hero-slider .slide {
+  opacity: 0;
+  visibility: hidden;
+  z-index: 1;
+  animation: hero-autoplay 45s infinite;
+  animation-timing-function: linear;
+  pointer-events: none;
+}
+
+.hero-slider .slide-1 { animation-delay: 0s; }
+.hero-slider .slide-2 { animation-delay: 5s; }
+.hero-slider .slide-3 { animation-delay: 10s; }
+.hero-slider .slide-4 { animation-delay: 15s; }
+.hero-slider .slide-5 { animation-delay: 20s; }
+.hero-slider .slide-6 { animation-delay: 25s; }
+.hero-slider .slide-7 { animation-delay: 30s; }
+.hero-slider .slide-8 { animation-delay: 35s; }
+.hero-slider .slide-9 { animation-delay: 40s; }
+
+@keyframes hero-autoplay {
+  0% { opacity: 1; visibility: visible; }
+  9% { opacity: 1; visibility: visible; }
+  11.111% { opacity: 0; visibility: hidden; }
+  100% { opacity: 0; visibility: hidden; }
+}
+
+.hero-slider .slide-legende {
+  pointer-events: auto;
+}
+
+.hero-slider .slide img {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+}
+
+.slide-voile {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(11, 9, 8, 0.78) 0%, rgba(11, 9, 8, 0.46) 38%, rgba(11, 9, 8, 0.10) 78%),
+    linear-gradient(0deg, rgba(11, 9, 8, 0.66) 0%, rgba(11, 9, 8, 0.08) 54%, rgba(11, 9, 8, 0.10) 100%);
+  z-index: 1;
+}
+
+.slide-legende {
+  position: absolute;
+  left: clamp(1.25rem, 7vw, 7rem);
+  right: clamp(1.25rem, 7vw, 7rem);
+  bottom: clamp(3rem, 9vh, 6.5rem);
+  max-width: 660px;
+  z-index: 3;
+  color: #fff;
+}
+
+.slide-legende .categorie {
+  color: #fff;
+  border-color: rgba(255,255,255,0.72);
+  background: rgba(0,0,0,0.10);
+}
+
+.slide-numero {
+  display: none;
+}
+
+.slide-legende h1,
+.slide-legende h2 {
+  font-size: clamp(2.3rem, 6vw, 5rem);
+  line-height: 0.98;
+  margin: 0.45rem 0 0.8rem;
+  color: #fff;
+  max-width: 13ch;
+}
+
+.slide-legende > p:not(.slide-numero) {
+  max-width: 48ch;
+  margin: 0 0 1.45rem;
+  color: rgba(255,255,255,0.93);
+  font-size: clamp(0.96rem, 1.5vw, 1.1rem);
+}
+
+.hero-slider .bouton--clair {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 170px;
+  padding: 0.85rem 1.9rem;
+  border: 2px solid #fff;
+  border-radius: 3px;
+  background: #fff;
+  color: #2A241E;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.20);
+  transition: transform var(--transition), background var(--transition), color var(--transition), box-shadow var(--transition);
+}
+
+.hero-slider .bouton--clair:hover,
+.hero-slider .bouton--clair:focus-visible {
+  background: #f4ede4;
+  color: #2A241E;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.24);
+  outline: none;
+}
+
+/* ---------- Introduction centrée de l'accueil ---------- */
+.intro-accueil {
+  width: min(100%, 780px);
+  margin: clamp(2.5rem, 5vw, 4rem) auto 0;
+  padding-inline: clamp(1rem, 4vw, 2rem);
+  text-align: center;
+}
+
+.intro-accueil .categorie {
+  display: inline-block;
+}
+
+.intro-accueil h1 {
+  margin-bottom: 0.45rem;
+}
+
+.intro-accueil .lieu-meta {
+  margin-bottom: 1rem;
+}
+
+.intro-accueil .accroche {
+  max-width: 70ch;
+  margin-inline: auto;
+}
+
+/* ---------- Petit lien visuel pour les cartes éditoriales ---------- */
+.carte-lien {
+  display: inline-block;
+  margin-top: 0.9rem;
+  color: var(--couleur-terre);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+
+.carte-destination:hover .carte-lien,
+.carte-destination:focus-visible .carte-lien {
+  text-decoration: underline;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-slider .slide {
+    animation: none;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .hero-slider .slide-1 {
+    opacity: 1;
+    visibility: visible;
+  }
+}
+
+/* ---------- Footer institutionnel ---------- */
+footer.site {
+  background: #211c18;
+  color: #dcd4cc;
+  padding: 0;
+  margin-top: clamp(3rem, 6vw, 5rem);
+}
+
+footer.site .contenu-footer {
+  width: min(100%, var(--largeur-max));
+  padding: clamp(2.2rem, 5vw, 4rem) clamp(1rem, 4vw, var(--espace-xl));
+  grid-template-columns: minmax(1.3fr, 1.6fr) repeat(4, minmax(0, 1fr));
+  gap: clamp(1.5rem, 3vw, 3rem);
+}
+
+footer.site section {
+  min-width: 0;
+}
+
+footer.site .footer-identite {
+  padding-right: clamp(1rem, 3vw, 2rem);
+  border-right: 1px solid rgba(255,255,255,0.12);
+}
+
+footer.site .footer-kicker {
+  display: inline-block;
+  color: var(--page-accent, #D5A33B);
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  font-size: 0.68rem;
+  font-weight: 600;
+  margin-bottom: 0.55rem;
+}
+
+footer.site h2,
+footer.site h3 {
+  color: #fff;
+}
+
+footer.site h2 {
+  font-size: 1.35rem;
+  margin-bottom: 0.55rem;
+}
+
+footer.site h3 {
+  font-family: var(--police-texte);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 0.75rem;
+}
+
+footer.site p {
+  margin: 0;
+  font-size: 0.82rem;
+  line-height: 1.65;
+  color: #bfb7ae;
+}
+
+footer.site ul {
+  margin: 0;
+  padding: 0;
+}
+
+footer.site li + li {
+  margin-top: 0.38rem;
+}
+
+footer.site a {
+  color: #dcd4cc;
+}
+
+footer.site a:hover,
+footer.site a:focus-visible {
+  color: #fff;
+  text-decoration: none;
+}
+
+footer.site address {
+  line-height: 1.75;
+}
+
+footer.site address span {
+  display: inline;
+}
+
+.footer-social-intro {
+  margin-bottom: 0.7rem !important;
+}
+
+.reseaux-sociaux {
+  gap: 0.5rem;
+}
+
+.icone-reseau {
+  width: 36px;
+  height: 36px;
+  border-radius: 3px;
+  background: rgba(255,255,255,0.07);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.icone-reseau:hover,
+.icone-reseau:focus-visible {
+  background: var(--rouge-haiti);
+}
+
+.copyright {
+  width: min(100%, var(--largeur-max));
+  padding: 1rem clamp(1rem, 4vw, var(--espace-xl));
+  margin: 0 auto;
+  border-top: 1px solid rgba(255,255,255,0.12);
+  text-align: center;
+  color: #9f968d;
+  font-size: 0.72rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-slider .slide {
+    transition: none;
+  }
+}
+
+/* ============================================================
+   CORRECTION FINALE 2026 — ALIGNEMENT DU CONTENU DU HERO
+   ============================================================ */
+.hero-slider {
+  width: 100%;
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+  transform: none;
+}
+
+.slide-legende {
+  left: max(24px, calc((100% - 950px) / 2));
+  right: auto;
+  width: min(660px, calc(100% - 48px));
+  max-width: none;
+  text-align: left;
+}
+
+.slide-legende .categorie,
+.slide-legende h2,
+.slide-legende > p:not(.slide-numero),
+.slide-legende .bouton--clair {
+  margin-left: 0;
+}
+
+.slide-legende h2 {
+  text-align: left;
+}
+
+.slide-legende > p:not(.slide-numero) {
+  text-align: left;
+}
+
+@media (max-width: 900px) {
+  .hero-slider {
+    width: 100%;
+    max-width: none;
+    margin-left: 0;
+    margin-right: 0;
+    transform: none;
+  }
+
+  .slide-legende {
+    left: 24px;
+    right: auto;
+    width: min(660px, calc(100% - 48px));
+    max-width: none;
+  }
+}
+
+@media (max-width: 720px) {
+  .hero-slider {
+    width: 100%;
+    max-width: none;
+    margin-left: 0;
+    transform: none;
+  }
+
+  .slide-legende {
+    left: 1rem;
+    right: 1rem;
+    width: auto;
+    max-width: none;
+  }
+}
+
+/* ============================================================
+   CORRECTION 2026-09 — HERO : largeur et composition du texte
+   ============================================================ */
+.hero-slider {
+  width: 100%;
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+  transform: none;
+  overflow: hidden;
+}
+
+body {
+  overflow-x: hidden;
+}
+
+.hero-slider .slide-legende {
+  left: clamp(2rem, 6.5vw, 6.5rem);
+  right: clamp(2rem, 6.5vw, 6.5rem);
+  bottom: clamp(3rem, 10vh, 6.5rem);
+  width: min(660px, calc(100% - 4rem));
+  max-width: 660px;
+}
+
+.hero-slider .slide-legende .categorie {
+  display: block;
+  width: max-content;
+  max-width: 100%;
+  margin: 0 0 0.75rem;
+}
+
+.hero-slider .slide-legende h2 {
+  display: block;
+  margin: 0 0 0.8rem;
+  clear: both;
+}
+
+.hero-slider .slide-legende > p:not(.slide-numero) {
+  margin-top: 0;
+}
+
+@media (max-width: 900px) {
+  .hero-slider {
+    width: 100%;
+    max-width: none;
+    margin-left: 0;
+    transform: none;
+  }
+
+  .hero-slider .slide-legende {
+    left: 1.5rem;
+    right: 1.5rem;
+    width: auto;
+    max-width: 680px;
+    bottom: clamp(2.5rem, 8vh, 5rem);
+  }
+}
+
+@media (max-width: 720px) {
+  .hero-slider {
+    width: 100%;
+    max-width: none;
+    margin-left: 0;
+    transform: none;
+  }
+
+  .hero-slider .slide-legende {
+    left: 1rem;
+    right: 1rem;
+    bottom: 2.5rem;
+    width: auto;
+    max-width: none;
+  }
+
+  .hero-slider .slide-legende .categorie {
+    font-size: 0.66rem;
+    white-space: normal;
+  }
+
+  .hero-slider .slide-legende h2 {
+    margin-bottom: 0.7rem;
+  }
+}
